@@ -1,5 +1,5 @@
-dist:     latest
-sudo:     required
+dist: bionic
+sudo: required
 
 language: cpp
 
