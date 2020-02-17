@@ -1,0 +1,28 @@
+dist:     latest
+sudo:     required
+
+language: cpp
+
+os:
+    - linux
+
+compiler:
+    - gcc
+
+install:
+    - source ci/travis/install-linux.sh
+
+script:
+    - make
+
+deploy:
+    provider:     releases
+    file:         <package-file>
+    skip_cleanup: true
+    overwrite:    true
+
+    api_key:
+        secure:   <encrypted-github-token>
+
+    on:
+        tags:     true
