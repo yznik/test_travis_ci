@@ -26,6 +26,7 @@ jobs:
       name: "Unit Tests"
       install:
         - source ci/travis/install-linux.sh
-      script: 
+      script:
+        - cd $TRAVIS_BUILD_DIR
         - make test_app
         - ./test_app
