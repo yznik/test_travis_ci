@@ -1,12 +1,18 @@
 .PHONY: all clean
 
-all: test
+all: app test
 
 fib.o:
 	g++ -c fib.cpp -o fib.o
 
-test: fib.o
-	g++ main.cpp fib.o -o test
+tests.o:
+	g++ -c tests.cpp -o tests.o
+
+app: fib.o
+	g++ main.cpp fib.o -o app
+
+test: tests.o fib.o
+	g++ tests.o fib.o -pthread -lgtest -o test
 
 clean:
-	rm -rf test *.o
+	rm -rf app test *.o
