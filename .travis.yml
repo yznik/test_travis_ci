@@ -27,5 +27,5 @@ jobs:
       install:
         - source ci/travis/install-linux.sh
       script: 
-        - make test
-        - ./test
+        - make test_app
+        - ./test_app
