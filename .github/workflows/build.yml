@@ -11,3 +11,5 @@ jobs:
     - uses: actions/checkout@v2
     - name: make
       run: make app
+    - name: run tests
+      run: make test_app && ./test_app
