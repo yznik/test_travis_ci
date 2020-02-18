@@ -1,6 +1,6 @@
-.PHONY: all clean test app
+.PHONY: all clean test_app app
 
-all: app test
+all: app test_app
 
 fib.o:
 	g++ -c fib.cpp -o fib.o
@@ -11,8 +11,8 @@ tests.o:
 app: fib.o
 	g++ main.cpp fib.o -o app
 
-test: tests.o fib.o
-	g++ tests.o fib.o -pthread -lgtest -o test
+test_app: tests.o fib.o
+	g++ tests.o fib.o -pthread -lgtest -o test_app
 
 clean:
 	rm -rf app test *.o
