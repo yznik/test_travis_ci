@@ -9,20 +9,22 @@ os:
 compiler:
     - gcc
 
-install:
-    - source ci/travis/install-linux.sh
+stages:
+  - compile
+  - test
 
-script:
-    - make
-
-deploy:
-    provider:     releases
-    file:         <package-file>
-    skip_cleanup: true
-    overwrite:    true
-
-    api_key:
-        secure:   <encrypted-github-token>
-
-    on:
-        tags:     true
+jobs:
+  include:
+    - stage: compile
+      name: "compilation"
+      install:
+        - source ci/travis/install-linux.sh
+      script:
+        - make app
+    - stage: "Tests"
+      name: "Unit Tests"
+      install:
+        - source ci/travis/install-linux.sh
+      script: 
+        - make test
+        - ./test
