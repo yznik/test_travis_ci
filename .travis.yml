@@ -20,6 +20,8 @@ jobs:
       install:
         - source ci/travis/install-linux.sh
       script:
+        - pwd
+        - ls
         - make app
     - stage: "Tests"
       name: "Unit Tests"

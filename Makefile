@@ -1,4 +1,4 @@
-.PHONY: all clean
+.PHONY: all clean test app
 
 all: app test
 
