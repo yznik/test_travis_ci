@@ -21,8 +21,9 @@ jobs:
       install:
         - source ci/travis/install-linux.sh
       script:
+        - cd $TRAVIS_BUILD_DIR
         - cppcheck -q --enable=all --std=c++11 --std=posix --suppress=missingIncludeSystem .
-        - scan-build -o ./result --status-bugs -analyze-headers make
+        - scan-build -o ./result --status-bugs -analyze-headers make app
     - stage: compile
       name: "compilation"
       install:
