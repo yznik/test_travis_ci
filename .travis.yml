@@ -1,5 +1,4 @@
 dist: bionic
-sudo: required
 
 language: cpp
 
@@ -10,12 +9,21 @@ compiler:
     - gcc
 
 stages:
+  - uncrustify
   - check
   - compile
   - test
 
 jobs:
   include:
+    - stage: uncrustify
+      name: "Check code style"
+      install:
+        - sudo apt install -qq uncrustify
+      script:
+        - find . -name "*.cpp" > files.txt
+        - find . -name "*.h" >> files.txt
+        - uncrustify -c uncrustify.cfg -F files.txt --check || echo "failed to uncrustify"
     - stage: check
       name: "Static analysis"
       install:
