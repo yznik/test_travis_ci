@@ -13,7 +13,7 @@ jobs:
       run: make app
     - name: run tests
       run: |
-        sudo apt install libgtest-dev cppcheck clang-tools -y
+        sudo apt install libgtest-dev -y
         cd /usr/src/gtest
         sudo cmake CMakeLists.txt
         sudo make
