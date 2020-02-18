@@ -12,4 +12,11 @@ jobs:
     - name: make
       run: make app
     - name: run tests
-      run: make test_app && ./test_app
+      run:
+        - sudo apt install libgtest-dev cppcheck clang-tools -y
+        - cd /usr/src/gtest
+        - sudo cmake CMakeLists.txt
+        - sudo make
+        - sudo cp *.a /usr/lib
+        - cd ~
+        - make test_app && ./test_app
