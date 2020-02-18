@@ -18,5 +18,5 @@ jobs:
         sudo cmake CMakeLists.txt
         sudo make
         sudo cp *.a /usr/lib
-        cd ~
+        cd $HOME
         make test_app && ./test_app
