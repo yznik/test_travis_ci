@@ -10,11 +10,19 @@ compiler:
     - gcc
 
 stages:
+  - check
   - compile
   - test
 
 jobs:
   include:
+    - stage: check
+      name: "Static analysis"
+      install:
+        - source ci/travis/install-linux.sh
+      script:
+        - cppcheck -q --enable=all --std=c++11 --std=posix --suppress=missingIncludeSystem .
+        - scan-build -o ./result --status-bugs -analyze-headers make
     - stage: compile
       name: "compilation"
       install:

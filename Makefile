@@ -15,4 +15,4 @@ test_app: tests.o fib.o
 	g++ tests.o fib.o -pthread -lgtest -o test_app
 
 clean:
-	rm -rf app test *.o
+	rm -rf app test_app *.o
