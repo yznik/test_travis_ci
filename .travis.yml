@@ -19,7 +19,8 @@ jobs:
     - stage: uncrustify
       name: "Check code style"
       install:
-        - sudo apt install uncrustify -y
+        - sudo apt-get update
+        - sudo apt-get install uncrustify -y
       script:
         - find . -name "*.cpp" > files.txt
         - find . -name "*.h" >> files.txt
