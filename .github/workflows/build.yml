@@ -18,7 +18,7 @@ jobs:
         uncrustify -c uncrustify.cfg -F files.txt --check || echo "failed to uncrustify"
     - name: check code with static analyzers
       run: |
-        sudo apt install cppcheck -y
+        sudo apt update && sudo apt install cppcheck clang-tools -y
         cppcheck -q --enable=all --std=c++11 --std=posix --suppress=missingIncludeSystem .
         scan-build -o ./result --status-bugs -analyze-headers make app
     - name: compilation
