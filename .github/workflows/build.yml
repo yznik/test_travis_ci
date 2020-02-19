@@ -19,7 +19,8 @@ jobs:
     - name: check code with static analyzers
       run: |
         sudo apt update
-        sudo apt install cppcheck clang-tools -y
+        sudo apt install cppcheck -y
+        sudo apt install clang-tools -y
         cppcheck -q --enable=all --std=c++11 --std=posix --suppress=missingIncludeSystem .
         scan-build -o ./result --status-bugs -analyze-headers make app
     - name: compilation
