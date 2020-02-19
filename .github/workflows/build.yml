@@ -20,7 +20,11 @@ jobs:
       run: |
         sudo apt update
         sudo apt install cppcheck -y
-        sudo apt install clang-6.0 clang-tools -y
+        wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
+        sudo apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-6.0 main"
+        sudo apt update
+        sudo apt install clang-6.0 -y
+        sudo apt install clang-tools -y
         cppcheck -q --enable=all --std=c++11 --std=posix --suppress=missingIncludeSystem .
         scan-build -o ./result --status-bugs -analyze-headers make app
     - name: compilation
