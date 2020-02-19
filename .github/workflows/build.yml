@@ -9,9 +9,21 @@ jobs:
     
     steps:
     - uses: actions/checkout@v2
-    - name: make
+    - name: check code style
+      run: |
+        sudo apt update
+        sudo apt install uncrustify -y
+        find . -name "*.cpp" > files.txt
+        find . -name "*.h" >> files.txt
+        uncrustify -c uncrustify.cfg -F files.txt --check || echo "failed to uncrustify"
+    - name: check code with static analyzers
+      run: |
+        sudo apt install cppcheck clang-tools -y
+        cppcheck -q --enable=all --std=c++11 --std=posix --suppress=missingIncludeSystem .
+        scan-build -o ./result --status-bugs -analyze-headers make app
+    - name: compilation
       run: make app
-    - name: run tests
+    - name: run unit tests
       run: |
         sudo apt install libgtest-dev -y
         cd /usr/src/gtest
